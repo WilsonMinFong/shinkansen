@@ -7,6 +7,7 @@ class Session
   def initialize(req)
     cookie = req.cookies['_rails_lite_app']
     @session = cookie ? JSON.parse(cookie) : {}
+    @session[:path] = '/'
   end
 
   def [](key)
