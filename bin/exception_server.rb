@@ -3,22 +3,7 @@ require_relative '../lib/controller_base'
 require_relative '../lib/router'
 require_relative '../lib/show_exceptions'
 
-class StatusesController < ControllerBase
-  def index
-    statuses = $statuses.select do |s|
-      s[:cat_id] == Integer(params['cat_id'])
-    end
-
-    render_content(statuses.to_s, "text/text")
-  end
-end
-
-class Cats2Controller < ControllerBase
-  def index
-    render_content($cats.to_s, "text/text")
-  end
-end
-
+# Server for testing show exception middleware
 class MyController < ControllerBase
   def critical
     raise "Critical error. Abort, abort, abort"
