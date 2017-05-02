@@ -23,7 +23,7 @@ class ControllerBase
     res.location = url
     res.status = 302
     session.store_session(res)
-    @already_built_response = true
+    self.already_built_response = true
   end
 
   def render_content(content, content_type)
@@ -32,7 +32,7 @@ class ControllerBase
     res['Content-Type'] = content_type
     res.write(content)
     session.store_session(res)
-    @already_built_response = true
+    self.already_built_response = true
   end
 
   def render(template_name)
@@ -54,6 +54,10 @@ class ControllerBase
 
   def invoke_action(action_name)
     send(action_name)
-    render(action_name) unless @already_built_response
+    render(action_name) unless already_built_response?
   end
+
+  protected
+
+  attr_writer :already_built_response
 end

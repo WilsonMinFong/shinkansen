@@ -9,7 +9,8 @@ class Route
   end
 
   def matches?(req)
-    req.path =~ pattern && req.request_method.downcase == http_method.to_s
+    req.path =~ pattern && 
+      req.request_method.downcase == http_method.to_s
   end
 
   def run(req, res)
