@@ -1,0 +1,8 @@
+<h1>ALL THE MOVIES</h1>
+
+<% if flash[:notice] %>
+  Notice: <%= flash[:notice] %>
+<% end %>
+
+<pre>Movie Data: <%= @movies.to_s %></pre>
+<a href="/movies/new">New Movie!</a>

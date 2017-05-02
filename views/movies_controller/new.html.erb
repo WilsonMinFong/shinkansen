@@ -4,9 +4,9 @@
   <% end %>
 <% end %>
 
-<form action="/dogs" method="POST">
+<form action="/movies" method="POST">
   <label>Name
-    <input type="text" name="dog[name]" value="<%= @dog.name %>">
+    <input type="text" name="movie[name]" value="<%= @movie.name %>">
   </label>
 
   <!-- <label>Form Authenticity Token
@@ -14,7 +14,7 @@
   </label> -->
 
   <label>Owner
-    <input type="text" name="dog[owner]" value="<%= @dog.owner %>">
+    <input type="text" name="movie[director]" value="<%= @movie.director %>">
   </label>
 
   <input type="submit">
