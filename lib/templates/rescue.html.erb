@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title><%= e.class %></title>
+    <style>
+      h1, p, section {
+        margin: 0;
+        padding: 0;
+        border: 0;
+
+        font-family: inherit;
+        font-size: inherit;
+        font-weight: inherit;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background: #EFEFEF;
+        display: flex;
+        color: #66666F;
+      }
+
+      ul {
+        margin: 0;
+      }
+
+      li {
+        list-style: disc;
+      }
+
+      main {
+        margin: 42px auto;
+        border: 1px solid gray;
+        border-radius: 10px 10px 5px 5px;
+        border-top: 4px solid #B00100;
+        box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
+      }
+
+      h1 {
+        padding: 18px;
+        text-align: center;
+        font-weight: bold;
+        background: white;
+        border-radius: 8px 8px 0 0;
+        border-bottom: 1px solid gray;
+        color: #730E15;
+        box-shadow: 0 1px 2px grey;
+      }
+
+      section {
+        margin: 12px;
+      }
+
+      code {
+        white-space: pre;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>
+        <%= e.class %>: <%= e.message %>
+      </h1>
+
+      <section class='source-code-preview'>
+        <label>Source Code Preview:</label>
+        <% source_code_preview(e).each do |line| %>
+          <code><%= line %></code>
+        <% end %>
+      </section>
+
+      <section class='stack-trace'>
+        <label>Stack Trace:</label>
+        <ul>
+          <% e.backtrace.each do |stack_level| %>
+          <li><%= CGI::escapeHTML(stack_level) %></li>
+          <% end %>
+        </ul>
+      </section>
+
+    </main>
+  </body>
+</html>
