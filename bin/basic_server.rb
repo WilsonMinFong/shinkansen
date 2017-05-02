@@ -1,5 +1,4 @@
 require 'rack'
-require 'byebug'
 
 app = Proc.new do |env|
   req = Rack::Request.new(env)

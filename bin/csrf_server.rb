@@ -2,10 +2,6 @@ require 'rack'
 require_relative '../lib/controller_base.rb'
 require_relative '../lib/router'
 
-# To test out your CSRF protection, go to the new dog form and
-# make sure it works! Alter the form_authenticity_token and see that
-# your server throws an error. 
-
 class Dog
   attr_reader :name, :owner
 
