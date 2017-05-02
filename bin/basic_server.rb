@@ -1,5 +1,6 @@
 require 'rack'
 
+# Basic server that sends request path in response
 app = Proc.new do |env|
   req = Rack::Request.new(env)
   res = Rack::Response.new

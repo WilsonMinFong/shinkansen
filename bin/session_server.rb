@@ -1,6 +1,8 @@
 require 'rack'
 require_relative '../lib/controller_base'
 
+# Server to test session cookies.  Refreshing page should increment by 1
+# May increment by 2 (once for page, once for favicon load)
 class MyController < ControllerBase
   def go
     session["count"] ||= 0

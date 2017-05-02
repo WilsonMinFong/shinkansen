@@ -4,7 +4,7 @@ class Session
   attr_reader :session
 
   def initialize(req)
-    cookie = req.cookies['_rails_lite_app']
+    cookie = req.cookies['_shinkansen_app']
     @session = cookie ? JSON.parse(cookie) : {}
     @session[:path] = '/'
   end
@@ -19,6 +19,6 @@ class Session
 
   def store_session(res)
     cookie = session.to_json
-    res.set_cookie('_rails_lite_app', cookie)
+    res.set_cookie('_shinkansen_app', cookie)
   end
 end

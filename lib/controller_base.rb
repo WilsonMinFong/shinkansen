@@ -38,7 +38,6 @@ class ControllerBase
   def render(template_name)
     controller_name = self.class.to_s.underscore
     path = "views/#{controller_name}/#{template_name}.html.erb"
-
     template = ERB.new(File.read(path))
 
     content = template.result(binding)
@@ -53,8 +52,8 @@ class ControllerBase
     @flash ||= Flash.new(req)
   end
 
-  def invoke_action(name)
-    send(name)
-    render(name) unless @already_built_response
+  def invoke_action(action_name)
+    send(action_name)
+    render(action_name) unless @already_built_response
   end
 end

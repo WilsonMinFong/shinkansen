@@ -1,6 +1,7 @@
 require 'rack'
 require_relative '../lib/controller_base'
 
+# Server to test ControllerBase template rendering
 class MyController < ControllerBase
   def go
     render :show

@@ -1,12 +1,13 @@
 require 'rack'
 require_relative '../lib/controller_base'
 
+# Server to test ControllerBase render_content and redirect_to methods
 class MyController < ControllerBase
   def go
-    if @req.path == "/cats"
-      render_content("hello cats!", "text/html")
+    if @req.path == "/games"
+      render_content("Here lies the game backlog!", "text/html")
     else
-      redirect_to("/cats")
+      redirect_to("/games")
     end
   end
 end
