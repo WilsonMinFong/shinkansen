@@ -13,7 +13,7 @@ class DBConnection
     @db
   end
 
-  def self.reset(db_file, sql_file)
+  def self.setup(db_file, sql_file)
     commands = [
       "rm '#{db_file}'",
       "cat '#{sql_file}' | sqlite3 '#{db_file}'"
@@ -24,8 +24,6 @@ class DBConnection
   end
 
   def self.instance
-    reset if @db.nil?
-
     @db
   end
 
