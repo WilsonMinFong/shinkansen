@@ -2,3 +2,7 @@
 .byebug_history
 tmp/
 spec/
+bin/
+public/
+views/
+games.sql

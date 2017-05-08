@@ -1,3 +1,6 @@
 # Shinkansen
 
-Shinkansen is a basic Ruby web framework inspired by Ruby on Rails.
+Shinkansen is a Ruby MVC web framework inspired by Ruby on
+Rails.  `ControllerBase` provides controller actions, including view
+rendering.  `ModelBase` provides basic Object-Relational Mapping (ORM)
+functionality.
