@@ -29,7 +29,7 @@ class ShowExceptions
   private
 
   def render_exception(e)
-    path = "lib/templates/rescue.html.erb"
+    path = File.join(File.dirname(__FILE__), "templates/rescue.html.erb")
     template = ERB.new(File.read(path))
 
     template.result(binding)

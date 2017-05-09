@@ -1,0 +1,34 @@
+<h1>Add a Message</h1>
+
+<form action="/messages" method="post">
+  <table>
+    <tr>
+      <th>
+        <label for="name">Name</label>
+      </th>
+      <td>
+        <input id="name" type="text" name="message[author]" value="">
+      </td>
+    </tr>
+    <tr>
+      <th>
+        <label for="message">Message</label>
+      </th>
+      <td>
+        <textarea id="message" name="message[body]"></textarea>
+      </td>
+    </tr>
+    <tr>
+      <th>
+        <label for="location">Location</label>
+      </th>
+      <td>
+        <input id="location" type="text" name="message[location]" value="">
+      </td>
+    </tr>
+  </table>
+
+  <input type="submit" value="Add message">
+</form>
+
+<a href="/messages">Messages Index</a>

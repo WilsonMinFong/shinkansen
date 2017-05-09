@@ -1,0 +1,9 @@
+<h1>Global Messages Index</h1>
+
+<ul>
+  <% @messages.each do |message| %>
+    <li><%= message.body %> - <%= message.author %> - <a href=<%= "/messages/#{message.id}" %>>Show</a></li>
+  <% end %>
+</ul>
+
+<a href="/messages/new">Add a message</a>

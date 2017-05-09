@@ -2,7 +2,7 @@ require 'sqlite3'
 
 PRINT_QUERIES = ENV['PRINT_QUERIES'] == 'true'
 # https://tomafro.net/2010/01/tip-relative-paths-with-file-expand-path
-ROOT_FOLDER = File.join(File.dirname(__FILE__), '../..')
+ROOT_FOLDER = File.join(File.dirname(__FILE__), '../../db')
 
 class DBConnection
   def self.open(db_file_name)
@@ -13,7 +13,10 @@ class DBConnection
     @db
   end
 
-  def self.setup(db_file, sql_file)
+  def self.setup(db_file_name, sql_file_name)
+    sql_file = File.join(ROOT_FOLDER, sql_file_name)
+    db_file = File.join(ROOT_FOLDER, db_file_name)
+
     commands = [
       "rm '#{db_file}'",
       "cat '#{sql_file}' | sqlite3 '#{db_file}'"
