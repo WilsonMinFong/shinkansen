@@ -44,7 +44,7 @@ Add the filenames of your SQLite database and setup file to
 
 - `find`, `insert`, `update`, and `destroy` rows in the database.
 - Filter database entries by column values using `where`.
-- Connect models with `belongs_to`, `has_many`, or `has_many_through`
+- Connect models with `belongs_to`, `has_many`, or `has_one_through`
   associations.
 
 ## Controller
