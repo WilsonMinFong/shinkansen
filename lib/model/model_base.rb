@@ -29,14 +29,6 @@ class ModelBase
     end
   end
 
-  def self.table_name=(table_name)
-    @table_name = table_name
-  end
-
-  def self.table_name
-    @table_name ||= self.to_s.tableize
-  end
-
   def self.all
     results = DBConnection.execute(<<-SQL)
       SELECT
@@ -54,10 +46,6 @@ class ModelBase
 
   def self.last
     all.last
-  end
-
-  def self.parse_all(results)
-    results.map { |result| self.new(result) }
   end
 
   def self.find(id)
@@ -85,10 +73,6 @@ class ModelBase
 
   def attributes
     @attributes ||= {}
-  end
-
-  def attribute_values
-    self.class.columns.map { |column| send(column) }
   end
 
   def insert
@@ -130,5 +114,25 @@ class ModelBase
       WHERE
         id = ?
     SQL
+
+    self.id = nil
+  end
+
+  protected
+
+  def self.table_name=(table_name)
+    @table_name = table_name
+  end
+
+  def self.table_name
+    @table_name ||= self.to_s.tableize
+  end
+
+  def self.parse_all(results)
+    results.map { |result| self.new(result) }
+  end
+
+  def attribute_values
+    self.class.columns.map { |column| send(column) }
   end
 end

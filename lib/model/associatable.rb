@@ -96,6 +96,8 @@ module Associatable
     end
   end
 
+  protected
+
   def assoc_options
     @assoc_options ||= {}
   end

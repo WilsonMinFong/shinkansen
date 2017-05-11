@@ -14,10 +14,6 @@ class ControllerBase
     @params = req.params.merge(params)
   end
 
-  def already_built_response?
-    @already_built_response
-  end
-
   def redirect_to(url)
     raise "Content already rendered" if already_built_response?
 
@@ -61,4 +57,8 @@ class ControllerBase
   protected
 
   attr_writer :already_built_response
+
+  def already_built_response?
+    @already_built_response
+  end
 end
