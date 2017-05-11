@@ -18,9 +18,10 @@ class DBConnection
     db_file = File.join(ROOT_FOLDER, db_file_name)
 
     commands = [
-      "rm '#{db_file}'",
       "cat '#{sql_file}' | sqlite3 '#{db_file}'"
     ]
+
+    commands.unshift("rm '#{db_file}'") if File.exist?(db_file)
 
     commands.each { |command| `#{command}` }
     DBConnection.open(db_file)
