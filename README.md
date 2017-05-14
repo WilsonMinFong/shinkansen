@@ -50,6 +50,20 @@ class Message < ModelBase
 end
 ```
 
+Shinkansen utilizes Ruby metaprogramming methods to add methods to
+`ModelBase` classes.  For example, `finalize!` utilizes `define_method`
+to add getter and setter methods corresponding to database columns.
+
+```ruby
+def self.finalize!
+  columns.each do |column|
+    define_method(column) { attributes[column] }
+
+    define_method("#{column}=") { |value| attributes[column] = value }
+  end
+end
+```
+
 #### Database Setup
 
 Add the filenames of your SQLite database and setup file to
@@ -114,6 +128,31 @@ Add Shinkansen controller functionality by inheriting from the
 ```ruby
 class MessagesController < ControllerBase
   # Controller actions...
+end
+```
+
+Shinkansen controllers take advantage of the `Rack::Request` and
+`Rack::Response` APIs to easily build responses.  For example,
+Shinkansen reads and writes session cookies using
+`Rack::Request#cookies` and `Rack::Response#set_cookie` under the
+`_shinkansen_app` key.
+
+```ruby
+class Session
+  attr_reader :session
+
+  def initialize(req)
+    cookie = req.cookies['_shinkansen_app']
+    @session = cookie ? JSON.parse(cookie) : {}
+    @session[:path] = '/'
+  end
+
+  def store_session(res)
+    cookie = session.to_json
+    res.set_cookie('_shinkansen_app', cookie)
+  end
+
+  # ...
 end
 ```
 
