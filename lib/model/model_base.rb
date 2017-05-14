@@ -6,27 +6,27 @@ require 'active_support/inflector'
 class ModelBase
   extend Associatable, Searchable
 
-  def self.columns
-    unless @columns
-      data = DBConnection.execute2(<<-SQL)
-        SELECT
-          *
-        FROM
-          #{table_name}
-      SQL
-
-      @columns = data.first.map(&:to_sym)
-    end
-
-    @columns
-  end
-
   def self.finalize!
     columns.each do |column|
       define_method(column) { attributes[column] }
 
       define_method("#{column}=") { |value| attributes[column] = value }
     end
+  end
+
+  def self.columns
+    unless @columns
+      data = DBConnection.execute2(<<-SQL)
+      SELECT
+      *
+      FROM
+      #{table_name}
+      SQL
+
+      @columns = data.first.map(&:to_sym)
+    end
+
+    @columns
   end
 
   def self.all
@@ -60,6 +60,7 @@ class ModelBase
 
     result.empty? ? nil : self.new(result.first)
   end
+
 
   def initialize(params = {})
     params.each do |attr_name, value|

@@ -7,22 +7,14 @@ class Router
     @routes = []
   end
 
-  def add_route(pattern, method, controller_class, action_name)
-    routes << Route.new(pattern, method, controller_class, action_name)
-  end
-
-  def draw(&proc)
-    instance_eval(&proc)
-  end
-
   [:get, :post, :put, :delete].each do |method|
     define_method(method) do |pattern, controller_class, action_name|
       add_route(pattern, method, controller_class, action_name)
     end
   end
 
-  def match(req)
-    routes.find { |route| route.matches?(req) }
+  def draw(&proc)
+    instance_eval(&proc)
   end
 
   def run(req, res)
@@ -34,5 +26,15 @@ class Router
       res.status = 404
       res.write("Route does not exist")
     end
+  end
+
+  protected
+
+  def add_route(pattern, method, controller_class, action_name)
+    routes << Route.new(pattern, method, controller_class, action_name)
+  end
+
+  def match(req)
+    routes.find { |route| route.matches?(req) }
   end
 end

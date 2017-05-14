@@ -20,6 +20,7 @@ class ControllerBase
     res.location = url
     res.status = 302
     session.store_session(res)
+    flash.store_flash(res)
     self.already_built_response = true
   end
 
@@ -29,6 +30,7 @@ class ControllerBase
     res['Content-Type'] = content_type
     res.write(content)
     session.store_session(res)
+    flash.store_flash(res)
     self.already_built_response = true
   end
 
